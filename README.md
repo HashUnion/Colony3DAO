@@ -1,13 +1,3 @@
-# Sample Hardhat Project
+# Colony3 DAO
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
-```
+GovernanceTokenAddress ===> 0x1F6636B948202f865dA7A4855a13993a3896aeCc
