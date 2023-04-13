@@ -2,8 +2,9 @@
 pragma solidity ^0.8.12;
 
 import "./GovernorBase.sol";
+import "./interfaces/IGovernorV1.sol";
 
-contract GovernorV1 is Initializable, GovernorBase {
+contract GovernorV1 is Initializable, GovernorBase, IGovernorV1 {
     function initialize(
         string calldata name_,
         IVotesUpgradeable token_

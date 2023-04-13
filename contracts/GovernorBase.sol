@@ -6,9 +6,8 @@ import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorSettin
 import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorCountingSimpleUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/governance/extensions/GovernorVotesQuorumFractionUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+
+import "./core/Upgradeable.sol";
 
 abstract contract GovernorBase is
     Initializable,
@@ -17,10 +16,8 @@ abstract contract GovernorBase is
     GovernorCountingSimpleUpgradeable,
     GovernorVotesUpgradeable,
     GovernorVotesQuorumFractionUpgradeable,
-    UUPSUpgradeable
+    Upgradeable
 {
-    uint16 private _version;
-
     function __GovernorBase_init(
         string memory name_,
         IVotesUpgradeable token_
@@ -30,22 +27,20 @@ abstract contract GovernorBase is
         __GovernorCountingSimple_init();
         __GovernorVotes_init(token_);
         __GovernorVotesQuorumFraction_init(50);
-        __UUPSUpgradeable_init();
+        __Upgradeable_init();
         __GovernorBase_init_unchained();
     }
 
-    function __GovernorBase_init_unchained() internal onlyInitializing {
-        _version = 1;
-    }
+    function __GovernorBase_init_unchained() internal onlyInitializing {}
 
-    function version() public view virtual override returns (string memory) {
-        return Strings.toString(_version);
-    }
-
-    function _authorizeUpgrade(
-        address /*newImplementation_*/
-    ) internal override onlyGovernance {
-        _version++;
+    function version()
+        public
+        view
+        virtual
+        override(GovernorUpgradeable, Upgradeable)
+        returns (string memory)
+    {
+        return Upgradeable.version();
     }
 
     function votingDelay()
