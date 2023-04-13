@@ -5,6 +5,7 @@ import "@nomiclabs/hardhat-etherscan";
 
 require('dotenv').config();
 const privateKey = process.env.PRIVATE_KEY as string;
+const mumbaiRpcUrl = process.env.RPC_URL_MUMBAI as string;
 const mumbaiEtherscanApiKey = process.env.ETHERSCAN_API_KEY_MUMBAI as string;
 
 const config: HardhatUserConfig = {
@@ -25,7 +26,7 @@ const config: HardhatUserConfig = {
       },
     },
     mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com",
+      url: mumbaiRpcUrl,
       accounts: [privateKey],
     }
   },
