@@ -15,7 +15,6 @@ abstract contract Upgradeable is
 
     function __Upgradeable_init() internal onlyInitializing {
         __Ownable_init();
-        _transferOwnership(address(this));
         __UUPSUpgradeable_init();
         __Upgradeable_init_unchained();
     }

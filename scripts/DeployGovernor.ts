@@ -42,6 +42,9 @@ async function main() {
     console.info("Governor Verfied")
   }).catch((error) => console.error(error));
 
+  await governor.transferOwnership(governor.address);
+  console.info(`Transferred Governance Ownership To ${governor.address}`);
+
   await governanceToken.transferOwnership(governor.address);
   console.info(`Transferred Governance Token Ownership To ${governor.address}`);
 
