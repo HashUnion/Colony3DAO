@@ -24,5 +24,7 @@ output:
 GovernorV2 Deployed ===> 0x245643D3c02709fA59eFE88A8053B0c51555135D
 GovernorV2 Verfied
 
-note: Before upgrading, please define a new Governor contract with each version number incremented.
+note: 
+1. Before upgrading, please define a new Governor contract with each version number incremented.
+2. After deployment, complete the upgrade through proposals
 ```
