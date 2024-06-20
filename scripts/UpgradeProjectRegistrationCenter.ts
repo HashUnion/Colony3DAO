@@ -7,19 +7,19 @@ async function main() {
 
   const Upgradeable = await ethers.getContractAt("Upgradeable", proxyAddress);
   const version = +(await Upgradeable.version()) + 1;
-  const Governor = await ethers.getContractFactory(`GovernorV${version}`);
-  const implementationAddress = await upgrades.prepareUpgrade(proxyAddress, Governor, { kind: 'uups' });
-  console.info(`Governor v${version} Deployed ===> ${implementationAddress.valueOf()}`);
+  const ProjectRegistrationCenter = await ethers.getContractFactory(`ProjectRegistrationCenterV${version}`);
+  const implementationAddress = await upgrades.prepareUpgrade(proxyAddress, ProjectRegistrationCenter, { kind: 'uups' });
+  console.info(`Project Registration Center v${version} Deployed ===> ${implementationAddress.valueOf()}`);
 
-  const verifyGovernor = new Promise(f => setTimeout(f, 5000)).then(async () => {
+  const verifyProjectRegistrationCenter = new Promise(f => setTimeout(f, 5000)).then(async () => {
     await hardhat.run("verify:verify", {
       address: implementationAddress,
       constructorArguments: [],
     });
-    console.info(`Governor v${version} Verfied`)
+    console.info(`Project Registration Center v${version} Verfied`)
   }).catch((error) => console.error(error));
 
-  await verifyGovernor;
+  await verifyProjectRegistrationCenter;
 }
 
 main().catch((error) => {

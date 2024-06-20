@@ -13,7 +13,7 @@ async function main() {
   const GovernanceToken = await ethers.getContractFactory("GovernanceToken");
   const governanceToken = await GovernanceToken.deploy(tokenName, tokenSymbol);
   await governanceToken.deployed();
-  console.info(`GovernanceToken Deployed To ${governanceToken.address}`);
+  console.info(`Governance Token Deployed To ${governanceToken.address}`);
 
   await governanceToken.mint(initMember, initAmount);
   console.info(`Minted ${initAmount} Token To ${initMember}`);
@@ -23,7 +23,7 @@ async function main() {
       address: governanceToken.address,
       constructorArguments: [tokenName, tokenSymbol],
     });
-    console.info("GovernanceToken Verfied");
+    console.info("Governance Token Verfied");
   }).catch((error) => console.error(error));
 
   const Governor = await ethers.getContractFactory("GovernorV1");
@@ -42,8 +42,11 @@ async function main() {
     console.info("Governor Verfied")
   }).catch((error) => console.error(error));
 
+  await governor.transferOwnership(governor.address);
+  console.info(`Transferred Governance Ownership To ${governor.address}`);
+
   await governanceToken.transferOwnership(governor.address);
-  console.info(`Transferred Ownership To ${governor.address}`);
+  console.info(`Transferred Governance Token Ownership To ${governor.address}`);
 
   await verifyGovernanceToken;
   await verifyGovernor;
